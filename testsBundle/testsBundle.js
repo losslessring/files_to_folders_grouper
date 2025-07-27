@@ -399,6 +399,29 @@ var removeSubstringByRegexp_test = () => {
   });
 };
 
+// tests/string/extractUniq.test.js
+var extractUniq_test_exports = {};
+__export(extractUniq_test_exports, {
+  extractUniq_test: () => extractUniq_test
+});
+
+// src/string/extractUniq.js
+function extractUniq(array) {
+  return [...new Set(array)];
+}
+
+// tests/string/extractUniq.test.js
+var extractUniq_test = () => {
+  describe("extract unique values from array", () => {
+    it("extract unique values from array", () => {
+      const strings = ["a", "b", "c", "a", "a", "b"];
+      const result = extractUniq(strings);
+      const expected = ["a", "b", "c"];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
 // tests/string/extractSubstringByRegExp.test.js
 var extractSubstringByRegExp_test_exports = {};
 __export(extractSubstringByRegExp_test_exports, {
@@ -466,6 +489,45 @@ var extractCommonSubsequence_test = () => {
   });
 };
 
+// tests/string/createGroups.test.js
+var createGroups_test_exports = {};
+__export(createGroups_test_exports, {
+  createGroups_test: () => createGroups_test
+});
+
+// src/string/createGroups.js
+function createGroups(array, regexp) {
+  return array;
+}
+
+// tests/string/createGroups.test.js
+var createGroups_test = () => {
+  describe("create groups from array", () => {
+    it("create groups from array", () => {
+      const strings = [
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part1_Downloadly.ir.rar",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part2_Downloadly.ir.rar",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part3_Downloadly.ir.rar",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part4_Downloadly.ir.rar",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part1.rar",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part2.rar",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part3.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part1_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part2_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part3_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part4_Downloadly.ir.rar"
+      ];
+      const result = createGroups(strings);
+      const expected = [
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025"
+      ];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
 // tests/string/createDirFromFiles.test.js
 var createDirFromFiles_test_exports = {};
 __export(createDirFromFiles_test_exports, {
@@ -492,17 +554,27 @@ function getFileNames(dirName) {
 import path from "path";
 var getFileNames_test2 = () => {
   describe("get file names from the folder", () => {
-    it("get file names from the folder", () => {
-      const dirName = path.resolve() + "\\tests\\files\\getFileNames\\testFolder";
+    it("get file names from the folder 0", () => {
+      const dirName = path.resolve() + "\\tests\\files\\getFileNames\\testFolder0";
       const result = getFileNames(dirName);
       const expected = ["a.txt", "b.txt", "c.txt"];
+      expect(result).toBe(expected);
+    });
+    it("get file names from the folder 1", () => {
+      const dirName = path.resolve() + "\\tests\\files\\getFileNames\\testFolder1";
+      const result = getFileNames(dirName);
+      const expected = [
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part1_Downloadly.ir.txt",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part2_Downloadly.ir.txt",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part3_Downloadly.ir.txt"
+      ];
       expect(result).toBe(expected);
     });
   });
 };
 
 // testsAutoImport.js
-var tests = { ...sum_test_exports, ...removeSubstringByRegexp_test_exports, ...extractSubstringByRegExp_test_exports, ...extractCommonSubsequence_test_exports, ...createDirFromFiles_test_exports, ...getFileNames_test_exports };
+var tests = { ...sum_test_exports, ...removeSubstringByRegexp_test_exports, ...extractUniq_test_exports, ...extractSubstringByRegExp_test_exports, ...extractCommonSubsequence_test_exports, ...createGroups_test_exports, ...createDirFromFiles_test_exports, ...getFileNames_test_exports };
 export {
   tests
 };
