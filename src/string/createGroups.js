@@ -1,3 +1,9 @@
+import { extractSubstringByRegExp } from './extractSubstringByRegExp'
+import { extractUniq } from './extractUniq'
+
 export function createGroups(array, regexp) {
-    return array
+    const cutted = array.map((string) =>
+        extractSubstringByRegExp(string, regexp)
+    )
+    return extractUniq(cutted)
 }

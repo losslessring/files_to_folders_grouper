@@ -399,6 +399,76 @@ var removeSubstringByRegexp_test = () => {
   });
 };
 
+// tests/string/fitGroups.test.js
+var fitGroups_test_exports = {};
+__export(fitGroups_test_exports, {
+  fitGroups_test: () => fitGroups_test
+});
+
+// src/string/fitGroups.js
+function fitGroups(array, groups) {
+  return groups.map((group) => ({
+    data: array.filter((string) => string.includes(group)),
+    group
+  }));
+}
+
+// tests/string/fitGroups.test.js
+var fitGroups_test = () => {
+  describe("fit groups", () => {
+    it("fit groups", () => {
+      const strings = [
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part1_Downloadly.ir.rar",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part2_Downloadly.ir.rar",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part3_Downloadly.ir.rar",
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part4_Downloadly.ir.rar",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part1.rar",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part2.rar",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part3.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part1_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part2_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part3_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part4_Downloadly.ir.rar"
+      ];
+      const groups = [
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12"
+      ];
+      const result = fitGroups(strings, groups);
+      const expected = [
+        {
+          data: [
+            "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part1_Downloadly.ir.rar",
+            "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part2_Downloadly.ir.rar",
+            "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part3_Downloadly.ir.rar",
+            "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part4_Downloadly.ir.rar"
+          ],
+          group: "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6"
+        },
+        {
+          data: [
+            "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part1.rar",
+            "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part2.rar",
+            "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part3.rar"
+          ],
+          group: "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4"
+        },
+        {
+          data: [
+            "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part1_Downloadly.ir.rar",
+            "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part2_Downloadly.ir.rar",
+            "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part3_Downloadly.ir.rar",
+            "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part4_Downloadly.ir.rar"
+          ],
+          group: "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12"
+        }
+      ];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
 // tests/string/extractUniq.test.js
 var extractUniq_test_exports = {};
 __export(extractUniq_test_exports, {
@@ -497,7 +567,10 @@ __export(createGroups_test_exports, {
 
 // src/string/createGroups.js
 function createGroups(array, regexp) {
-  return array;
+  const cutted = array.map(
+    (string) => extractSubstringByRegExp(string, regexp)
+  );
+  return extractUniq(cutted);
 }
 
 // tests/string/createGroups.test.js
@@ -512,16 +585,16 @@ var createGroups_test = () => {
         "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part1.rar",
         "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part2.rar",
         "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4_Downloadly.ir.part3.rar",
-        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part1_Downloadly.ir.rar",
-        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part2_Downloadly.ir.rar",
-        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part3_Downloadly.ir.rar",
-        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-7.part4_Downloadly.ir.rar"
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part1_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part2_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part3_Downloadly.ir.rar",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12.part4_Downloadly.ir.rar"
       ];
-      const result = createGroups(strings);
+      const result = createGroups(strings, /(^.*?\d{4}-\d{1,})/);
       const expected = [
-        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023",
-        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023",
-        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025"
+        "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6",
+        "Udemy_Computational_Fluid_Dynamics_Fundamentals_Course_2_2023-4",
+        "Udemy_N8N_Automation_Course_from_Zero_to_Expert_2025-12"
       ];
       expect(result).toBe(expected);
     });
@@ -538,30 +611,121 @@ var getFileNames_test = () => {
   });
 };
 
+// tests/files/renameFile/renameFile.test.js
+var renameFile_test_exports = {};
+__export(renameFile_test_exports, {
+  renameFile_test: () => renameFile_test
+});
+import path from "path";
+
+// src/files/renameFile.js
+import fs from "fs";
+function renameFile(oldPath, newPath) {
+  fs.renameSync(oldPath, newPath);
+}
+
+// src/files/getFileNames.js
+import fs2 from "fs";
+function getFileNames(dirName) {
+  return fs2.readdirSync(dirName);
+}
+
+// tests/files/renameFile/renameFile.test.js
+var renameFile_test = () => {
+  describe("rename file", () => {
+    it("rename file", () => {
+      const oldPath = path.resolve() + "\\tests\\files\\renameFile\\testFolder0\\a.txt";
+      const newPath = path.resolve() + "\\tests\\files\\renameFile\\testFolder0\\innerFolder\\a.txt";
+      renameFile(oldPath, newPath);
+      const directoryWithMovedFile = path.resolve() + "\\tests\\files\\renameFile\\testFolder0\\innerFolder\\";
+      const result = getFileNames(directoryWithMovedFile);
+      const expected = ["a.txt"];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
+// tests/files/makeDirs/makeDirs.test.js
+var makeDirs_test_exports = {};
+__export(makeDirs_test_exports, {
+  makeDirs_test: () => makeDirs_test
+});
+import path2 from "path";
+
+// src/files/makeDir.js
+import fs3 from "fs";
+function makeDir(dir) {
+  if (!fs3.existsSync(dir)) {
+    fs3.mkdirSync(dir);
+  }
+}
+
+// src/files/makeDirs.js
+function makeDirs(dirNames) {
+  dirNames.forEach((dirName) => {
+    makeDir(dirName);
+  });
+}
+
+// src/files/getDirs.js
+import { readdirSync } from "fs";
+function getDirs(source) {
+  return readdirSync(source, { withFileTypes: true }).filter((dirent) => dirent.isDirectory()).map((dirent) => dirent.name);
+}
+
+// tests/files/makeDirs/makeDirs.test.js
+var makeDirs_test = () => {
+  describe("make directories", () => {
+    it("make directories", () => {
+      const resolvedPath = path2.resolve() + "\\tests\\files\\makeDirs\\testFolder0";
+      const dirNames = [
+        resolvedPath + "\\testDir0",
+        resolvedPath + "\\testDir1"
+      ];
+      makeDirs(dirNames);
+      const createdDirName = path2.resolve() + "\\tests\\files\\makeDirs\\testFolder0\\";
+      const result = getDirs(createdDirName);
+      const expected = ["testDir0", "testDir1"];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
+// tests/files/makeDir/makeDir.test.js
+var makeDir_test_exports = {};
+__export(makeDir_test_exports, {
+  makeDir_test: () => makeDir_test
+});
+import path3 from "path";
+var makeDir_test = () => {
+  describe("make directory", () => {
+    it("make directory", () => {
+      const dirName = path3.resolve() + "\\tests\\files\\makeDir\\testFolder0\\testDir0";
+      makeDir(dirName);
+      const createdDirName = path3.resolve() + "\\tests\\files\\makeDir\\testFolder0\\";
+      const result = getDirs(createdDirName);
+      const expected = ["testDir0"];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
 // tests/files/getFileNames/getFileNames.test.js
 var getFileNames_test_exports = {};
 __export(getFileNames_test_exports, {
   getFileNames_test: () => getFileNames_test2
 });
-
-// src/files/getFileNames.js
-import fs from "fs";
-function getFileNames(dirName) {
-  return fs.readdirSync(dirName);
-}
-
-// tests/files/getFileNames/getFileNames.test.js
-import path from "path";
+import path4 from "path";
 var getFileNames_test2 = () => {
   describe("get file names from the folder", () => {
     it("get file names from the folder 0", () => {
-      const dirName = path.resolve() + "\\tests\\files\\getFileNames\\testFolder0";
+      const dirName = path4.resolve() + "\\tests\\files\\getFileNames\\testFolder0";
       const result = getFileNames(dirName);
       const expected = ["a.txt", "b.txt", "c.txt"];
       expect(result).toBe(expected);
     });
     it("get file names from the folder 1", () => {
-      const dirName = path.resolve() + "\\tests\\files\\getFileNames\\testFolder1";
+      const dirName = path4.resolve() + "\\tests\\files\\getFileNames\\testFolder1";
       const result = getFileNames(dirName);
       const expected = [
         "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part1_Downloadly.ir.txt",
@@ -573,8 +737,25 @@ var getFileNames_test2 = () => {
   });
 };
 
+// tests/files/getDirs/getDirs.test.js
+var getDirs_test_exports = {};
+__export(getDirs_test_exports, {
+  getDirs_test: () => getDirs_test
+});
+import path5 from "path";
+var getDirs_test = () => {
+  describe("get directory names from the folder", () => {
+    it("get directory names from the folder 0", () => {
+      const dirName = path5.resolve() + "\\tests\\files\\getDirs\\testFolder0";
+      const result = getDirs(dirName);
+      const expected = ["testDir0", "testDir1"];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
 // testsAutoImport.js
-var tests = { ...sum_test_exports, ...removeSubstringByRegexp_test_exports, ...extractUniq_test_exports, ...extractSubstringByRegExp_test_exports, ...extractCommonSubsequence_test_exports, ...createGroups_test_exports, ...createDirFromFiles_test_exports, ...getFileNames_test_exports };
+var tests = { ...sum_test_exports, ...removeSubstringByRegexp_test_exports, ...fitGroups_test_exports, ...extractUniq_test_exports, ...extractSubstringByRegExp_test_exports, ...extractCommonSubsequence_test_exports, ...createGroups_test_exports, ...createDirFromFiles_test_exports, ...renameFile_test_exports, ...makeDirs_test_exports, ...makeDir_test_exports, ...getFileNames_test_exports, ...getDirs_test_exports };
 export {
   tests
 };
