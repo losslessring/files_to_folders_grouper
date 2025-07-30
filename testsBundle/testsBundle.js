@@ -601,13 +601,21 @@ var createGroups_test = () => {
   });
 };
 
-// tests/string/createDirFromFiles.test.js
-var createDirFromFiles_test_exports = {};
-__export(createDirFromFiles_test_exports, {
-  getFileNames_test: () => getFileNames_test
+// tests/files/renameFiles/renameFiles.test.js
+var renameFiles_test_exports = {};
+__export(renameFiles_test_exports, {
+  renameFiles_test: () => renameFiles_test
 });
-var getFileNames_test = () => {
-  describe("create directory name from files", () => {
+
+// src/files/getFileNames.js
+import fs from "fs";
+function getFileNames(dirName) {
+  return fs.readdirSync(dirName);
+}
+
+// tests/files/renameFiles/renameFiles.test.js
+var renameFiles_test = () => {
+  describe("rename files", () => {
   });
 };
 
@@ -616,32 +624,8 @@ var renameFile_test_exports = {};
 __export(renameFile_test_exports, {
   renameFile_test: () => renameFile_test
 });
-import path from "path";
-
-// src/files/renameFile.js
-import fs from "fs";
-function renameFile(oldPath, newPath) {
-  fs.renameSync(oldPath, newPath);
-}
-
-// src/files/getFileNames.js
-import fs2 from "fs";
-function getFileNames(dirName) {
-  return fs2.readdirSync(dirName);
-}
-
-// tests/files/renameFile/renameFile.test.js
 var renameFile_test = () => {
   describe("rename file", () => {
-    it("rename file", () => {
-      const oldPath = path.resolve() + "\\tests\\files\\renameFile\\testFolder0\\a.txt";
-      const newPath = path.resolve() + "\\tests\\files\\renameFile\\testFolder0\\innerFolder\\a.txt";
-      renameFile(oldPath, newPath);
-      const directoryWithMovedFile = path.resolve() + "\\tests\\files\\renameFile\\testFolder0\\innerFolder\\";
-      const result = getFileNames(directoryWithMovedFile);
-      const expected = ["a.txt"];
-      expect(result).toBe(expected);
-    });
   });
 };
 
@@ -650,13 +634,13 @@ var makeDirs_test_exports = {};
 __export(makeDirs_test_exports, {
   makeDirs_test: () => makeDirs_test
 });
-import path2 from "path";
+import path from "path";
 
 // src/files/makeDir.js
-import fs3 from "fs";
+import fs2 from "fs";
 function makeDir(dir) {
-  if (!fs3.existsSync(dir)) {
-    fs3.mkdirSync(dir);
+  if (!fs2.existsSync(dir)) {
+    fs2.mkdirSync(dir);
   }
 }
 
@@ -677,13 +661,13 @@ function getDirs(source) {
 var makeDirs_test = () => {
   describe("make directories", () => {
     it("make directories", () => {
-      const resolvedPath = path2.resolve() + "\\tests\\files\\makeDirs\\testFolder0";
+      const resolvedPath = path.resolve() + "\\tests\\files\\makeDirs\\testFolder0";
       const dirNames = [
         resolvedPath + "\\testDir0",
         resolvedPath + "\\testDir1"
       ];
       makeDirs(dirNames);
-      const createdDirName = path2.resolve() + "\\tests\\files\\makeDirs\\testFolder0\\";
+      const createdDirName = path.resolve() + "\\tests\\files\\makeDirs\\testFolder0\\";
       const result = getDirs(createdDirName);
       const expected = ["testDir0", "testDir1"];
       expect(result).toBe(expected);
@@ -696,13 +680,13 @@ var makeDir_test_exports = {};
 __export(makeDir_test_exports, {
   makeDir_test: () => makeDir_test
 });
-import path3 from "path";
+import path2 from "path";
 var makeDir_test = () => {
   describe("make directory", () => {
     it("make directory", () => {
-      const dirName = path3.resolve() + "\\tests\\files\\makeDir\\testFolder0\\testDir0";
+      const dirName = path2.resolve() + "\\tests\\files\\makeDir\\testFolder0\\testDir0";
       makeDir(dirName);
-      const createdDirName = path3.resolve() + "\\tests\\files\\makeDir\\testFolder0\\";
+      const createdDirName = path2.resolve() + "\\tests\\files\\makeDir\\testFolder0\\";
       const result = getDirs(createdDirName);
       const expected = ["testDir0"];
       expect(result).toBe(expected);
@@ -713,19 +697,19 @@ var makeDir_test = () => {
 // tests/files/getFileNames/getFileNames.test.js
 var getFileNames_test_exports = {};
 __export(getFileNames_test_exports, {
-  getFileNames_test: () => getFileNames_test2
+  getFileNames_test: () => getFileNames_test
 });
-import path4 from "path";
-var getFileNames_test2 = () => {
+import path3 from "path";
+var getFileNames_test = () => {
   describe("get file names from the folder", () => {
     it("get file names from the folder 0", () => {
-      const dirName = path4.resolve() + "\\tests\\files\\getFileNames\\testFolder0";
+      const dirName = path3.resolve() + "\\tests\\files\\getFileNames\\testFolder0";
       const result = getFileNames(dirName);
       const expected = ["a.txt", "b.txt", "c.txt"];
       expect(result).toBe(expected);
     });
     it("get file names from the folder 1", () => {
-      const dirName = path4.resolve() + "\\tests\\files\\getFileNames\\testFolder1";
+      const dirName = path3.resolve() + "\\tests\\files\\getFileNames\\testFolder1";
       const result = getFileNames(dirName);
       const expected = [
         "Udemy_From_Concept_to_Cloud_Mastering_Full-Stack_Web_Development_2023-6.part1_Downloadly.ir.txt",
@@ -742,11 +726,11 @@ var getDirs_test_exports = {};
 __export(getDirs_test_exports, {
   getDirs_test: () => getDirs_test
 });
-import path5 from "path";
+import path4 from "path";
 var getDirs_test = () => {
   describe("get directory names from the folder", () => {
     it("get directory names from the folder 0", () => {
-      const dirName = path5.resolve() + "\\tests\\files\\getDirs\\testFolder0";
+      const dirName = path4.resolve() + "\\tests\\files\\getDirs\\testFolder0";
       const result = getDirs(dirName);
       const expected = ["testDir0", "testDir1"];
       expect(result).toBe(expected);
@@ -754,8 +738,40 @@ var getDirs_test = () => {
   });
 };
 
+// tests/files/createDirsFromFiles/createDirsFromFileGroups.test.js
+var createDirsFromFileGroups_test_exports = {};
+__export(createDirsFromFileGroups_test_exports, {
+  createDirsFromFileGroups_test: () => createDirsFromFileGroups_test
+});
+
+// src/files/createDirsFromFileGroups.js
+function createDirsFromFileGroups(dirName, regexp) {
+  const fileNames = getFileNames(dirName);
+  const cuttedFileNames = fileNames.map(
+    (fileName) => removeSubstringByRegexp(fileName, regexp, "")
+  );
+  return extractUniq(cuttedFileNames);
+}
+
+// tests/files/createDirsFromFiles/createDirsFromFileGroups.test.js
+import path5 from "path";
+var createDirsFromFileGroups_test = () => {
+  describe("create directories from file groups", () => {
+    it("create directories from file groups", () => {
+      const dirName = path5.resolve() + "\\tests\\files\\createDirsFromFiles\\testFolder0";
+      const regexp = /.part[0-9]_Downloadly.ir.txt/;
+      const result = createDirsFromFileGroups(dirName, regexp);
+      const expected = [
+        "Udemy_Mastering_Jest_Testing_with_TypeScript_and_Node.js_2025-5",
+        "Udemy_The_Complete_Quantum_Computing_Course_with_Python_2025_2025-3"
+      ];
+      expect(result).toBe(expected);
+    });
+  });
+};
+
 // testsAutoImport.js
-var tests = { ...sum_test_exports, ...removeSubstringByRegexp_test_exports, ...fitGroups_test_exports, ...extractUniq_test_exports, ...extractSubstringByRegExp_test_exports, ...extractCommonSubsequence_test_exports, ...createGroups_test_exports, ...createDirFromFiles_test_exports, ...renameFile_test_exports, ...makeDirs_test_exports, ...makeDir_test_exports, ...getFileNames_test_exports, ...getDirs_test_exports };
+var tests = { ...sum_test_exports, ...removeSubstringByRegexp_test_exports, ...fitGroups_test_exports, ...extractUniq_test_exports, ...extractSubstringByRegExp_test_exports, ...extractCommonSubsequence_test_exports, ...createGroups_test_exports, ...renameFiles_test_exports, ...renameFile_test_exports, ...makeDirs_test_exports, ...makeDir_test_exports, ...getFileNames_test_exports, ...getDirs_test_exports, ...createDirsFromFileGroups_test_exports };
 export {
   tests
 };

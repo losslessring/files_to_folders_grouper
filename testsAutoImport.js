@@ -5,10 +5,11 @@ import * as test_3 from './tests/string/extractUniq.test.js'
 import * as test_4 from './tests/string/extractSubstringByRegExp.test.js'
 import * as test_5 from './tests/string/extractCommonSubsequence.test.js'
 import * as test_6 from './tests/string/createGroups.test.js'
-import * as test_7 from './tests/string/createDirFromFiles.test.js'
+import * as test_7 from './tests/files/renameFiles/renameFiles.test.js'
 import * as test_8 from './tests/files/renameFile/renameFile.test.js'
 import * as test_9 from './tests/files/makeDirs/makeDirs.test.js'
 import * as test_10 from './tests/files/makeDir/makeDir.test.js'
 import * as test_11 from './tests/files/getFileNames/getFileNames.test.js'
 import * as test_12 from './tests/files/getDirs/getDirs.test.js'
-export const tests = {...test_0,...test_1,...test_2,...test_3,...test_4,...test_5,...test_6,...test_7,...test_8,...test_9,...test_10,...test_11,...test_12}
+import * as test_13 from './tests/files/createDirsFromFiles/createDirsFromFileGroups.test.js'
+export const tests = {...test_0,...test_1,...test_2,...test_3,...test_4,...test_5,...test_6,...test_7,...test_8,...test_9,...test_10,...test_11,...test_12,...test_13}
