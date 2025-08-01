@@ -34,5 +34,19 @@ export const getFileNames_test = () => {
 
             expect(result).toBe(expected)
         })
+
+        it('get file names from the folder 2', () => {
+            const dirName =
+                path.resolve() +
+                '\\' +
+                'tests\\files\\getFileNames\\testFolder2'
+
+            const options = { withFileTypes: true }
+            const result = getFileNames(dirName, options)
+
+            const expected = ['b.txt', 'c.txt']
+
+            expect(result).toBe(expected)
+        })
     })
 }
