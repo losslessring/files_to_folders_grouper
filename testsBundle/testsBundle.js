@@ -500,7 +500,14 @@ __export(extractSubstringByRegExp_test_exports, {
 
 // src/string/extractSubstringByRegExp.js
 function extractSubstringByRegExp(string, regexp) {
-  return string.match(regexp)[0];
+  const match = string.match(regexp);
+  if (match === null) {
+    throw new Error(
+      `Regular expression ${regexp} does not matched anything in the ${string}`
+    );
+  } else {
+    return string.match(regexp)[0];
+  }
 }
 
 // tests/string/extractSubstringByRegExp.test.js
@@ -772,8 +779,8 @@ function createDirsFromFileGroups(dirName, regexp, delimiter) {
 var createDirsFromFileGroups_test = () => {
   describe("create directories from file groups", () => {
     it("create directories from file groups", () => {
-      const dirName = `C:\\tutorials\\temp`;
-      const regexp = /(^.*?\d{4}-\d{1,})/;
+      const dirName = `d:\\Users\\pavel\\Downloads\\temp\\`;
+      const regexp = /(^.*?\d{4}.\d{1,})/;
       const delimiter = "\\";
       const result = createDirsFromFileGroups(dirName, regexp, delimiter);
       const expected = void 0;

@@ -10,8 +10,8 @@ export const createDirsFromFileGroups_test = () => {
             //     '\\' +
             //     'tests\\files\\createDirsFromFiles\\testFolder0'
 
-            const dirName = `C:\\tutorials\\temp`
-            const regexp = /(^.*?\d{4}-\d{1,})/
+            const dirName = `d:\\Users\\pavel\\Downloads\\temp\\`
+            const regexp = /(^.*?\d{4}.\d{1,})/
             const delimiter = '\\'
             const result = createDirsFromFileGroups(dirName, regexp, delimiter)
 
